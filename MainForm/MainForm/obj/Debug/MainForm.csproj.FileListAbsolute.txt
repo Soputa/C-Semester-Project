@@ -1,0 +1,10 @@
+C:\Users\SirOp\source\repos\MainForm\MainForm\obj\Debug\MainForm.csproj.AssemblyReference.cache
+C:\Users\SirOp\source\repos\MainForm\MainForm\obj\Debug\MainForm.Form1.resources
+C:\Users\SirOp\source\repos\MainForm\MainForm\obj\Debug\MainForm.Properties.Resources.resources
+C:\Users\SirOp\source\repos\MainForm\MainForm\obj\Debug\MainForm.csproj.GenerateResource.cache
+C:\Users\SirOp\source\repos\MainForm\MainForm\obj\Debug\MainForm.csproj.CoreCompileInputs.cache
+C:\Users\SirOp\source\repos\MainForm\MainForm\bin\Debug\MainForm.exe.config
+C:\Users\SirOp\source\repos\MainForm\MainForm\bin\Debug\MainForm.exe
+C:\Users\SirOp\source\repos\MainForm\MainForm\bin\Debug\MainForm.pdb
+C:\Users\SirOp\source\repos\MainForm\MainForm\obj\Debug\MainForm.exe
+C:\Users\SirOp\source\repos\MainForm\MainForm\obj\Debug\MainForm.pdb
