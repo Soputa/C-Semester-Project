@@ -21,47 +21,52 @@ namespace MainForm
             "Science Fiction" , //8
             "Western" //9
             };
-            //Core Get/Set Properties 
+        //Core Get/Set Properties 
 
-            public int Id { get; set; }
-            
-            public string Title { get; set; }
-            
-            public int Year { get; set; }
-            
-            public string Director { get; set; }
+        public int Id { get; set; }
 
-            public int Genre { get; set; }
+        public string Title { get; set; }
 
-            public int RottenTomatoesScore { get; set; }
+        public int Year { get; set; }
 
-            public double TotalEarned { get; set; }
+        public string Director { get; set; }
+
+        public int Genre { get; set; }
+
+        public int RottenTomatoesScore { get; set; }
+
+        public double TotalEarned { get; set; }
 
 
-            public Movie()
-            {
-                Id = -1;
-                Title = "";
-                Year = 0;
-                Director = "";
-                Genre = -0;
-                RottenTomatoesScore = -1; // -1 indicates a null
-                TotalEarned = -1; //-1 null
-            }
-            
-            /*Alternate property with getter just for Genre description
-           // public string GenreText
-            {
-                //get {if ((Genre =>) &&)(Genre < genres.Count)} return genres
-            }
+        public Movie()
+        {
+            Id = -1;
+            Title = "";
+            Year = 0;
+            Director = "";
+            Genre = -0;
+            RottenTomatoesScore = -1; // -1 indicates a null
+            TotalEarned = -1; //-1 null
+        }
 
-           // public string Ro
-            
-            //public string TotalEarnedText
-            {
+        // Alternate property with getter just for Genre description
+        public string GenreText
+        {
+            get { if ((Genre >= 0) && (Genre < genres.Count)) return genres[Genre]; else return ""; }
+        }
 
-            }
-           */
-        
+        public string RottenTomatoesScoreText
+        {
+            get { if (RottenTomatoesScore >= 0) return $"{RottenTomatoesScore:n0}"; else return ""; }
+        }
+
+
+        public string TotalEarnedText
+        {
+            get { if (TotalEarned >= 0) return $"{TotalEarned:c}"; else return ""; }
+
+        }
+
+
     }
 }

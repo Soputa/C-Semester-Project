@@ -55,6 +55,16 @@ namespace MainForm
             //Always start by binding the movie list with the datagridview
             dataGridViewMovies.DataSource = masterMovieList;
 
+            //Hide ID 
+            dataGridViewMovies.Columns["Id"].Visible = false;
+            dataGridViewMovies.Columns["Genre"].Visible = false;
+            dataGridViewMovies.Columns["TotalEarned"].Visible = false;
+            dataGridViewMovies.Columns["RottenTomatoesScore"].Visible = false;
+
+            //Rename the columns
+            dataGridViewMovies.Columns["GenreText"].HeaderText = "Genre";
+            dataGridViewMovies.Columns["TotalEarnedText"].HeaderText = "TotalEarned";
+            dataGridViewMovies.Columns["RottenTomatoesScoreText"].HeaderText = "RottenTomatoesScore";
             DbOps.RefreshMovies(masterMovieList);
         }
     }
