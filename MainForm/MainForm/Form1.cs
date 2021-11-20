@@ -38,16 +38,20 @@ namespace MainForm
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //Create the new About form
-           // FAbout aboutForm = new FAbout();
+           About aboutForm = new About();
             //Showing the form as a dialog blocks execution until the form is closed (perfect)
-           //aboutForm.ShowDialog();
+           aboutForm.ShowDialog();
         }
 
         private void deleteMovieToolStripMenuItem_Click(object sender, EventArgs e)
 
-        {   //Need to create a delete form
-            //Open a new deleteForm = new FDelete();
-            //deleteForm.ShowDialog();
+        {   //Create a delete form
+            Delete_Form deleteForm = new Delete_Form();
+            //This is a blocking line, you can't do anything until it is closed
+            deleteForm.ShowDialog();
+            //Refresh list if changes where made
+            DbOps.RefreshMovies(masterMovieList);
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -66,6 +70,24 @@ namespace MainForm
             dataGridViewMovies.Columns["TotalEarnedText"].HeaderText = "TotalEarned";
             dataGridViewMovies.Columns["RottenTomatoesScoreText"].HeaderText = "RottenTomatoesScore";
             DbOps.RefreshMovies(masterMovieList);
+        }
+
+        private void addMovieToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Add addForm = new Add();
+            addForm.ShowDialog();
+
+            DbOps.RefreshMovies(masterMovieList);
+
+        }
+
+        private void updateMovieToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Update updateForm = new Update();
+            updateForm.ShowDialog();
+
+            DbOps.RefreshMovies(masterMovieList);
+
         }
     }
 }

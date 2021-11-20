@@ -24,7 +24,7 @@ namespace MainForm
         // Director (string-50)
         // Genre (int)
         // RottenTomatoesScore (int)
-        // TotalEarned (double)
+        // TotalEarned (double) 
 
         //The query we'll use to refresh the list of available movies
         private const string databaseQuery = "SELECT Id, Title, Year, Director, Genre, RottenTomatoesScore, TotalEarned FROM dbo.MOVIES ORDER BY Title";
@@ -150,11 +150,116 @@ namespace MainForm
             return true;
         }
 
-        static public bool AddMovieToDatabase(Movie newMovie)
+        /*static public bool AddMovieToDatabase(Movie newMovie)
         {
-            //Implementation removed
-            return true;
-        }
+                ConnectionStringSettings csOurDb = ConfigurationManager.ConnectionStrings[configOurDb];
+            string csciClassConnex = csOurDb?.ConnectionString;
+
+            if (!(csOurDb is null) && (csciClassConnex.Length > 0))
+            {
+                //Connection string exists - now let's try to connect!
+                SqlConnection dbConnex = null;
+                bool keepMoving = true;
+
+                try
+                {
+                    //Attempt the open!
+                    dbConnex.Open();
+                    cmd = new SqlCommand("databaseInsertCommand", dbConnex);
+                }
+         
+        /*
+
+            /*
+            //Retrieve the connection string from the App.Config file
+            ConnectionStringSettings csOurDb = ConfigurationManager.ConnectionStrings[configOurDb];
+            string csciClassConnex = csOurDb?.ConnectionString;
+            if (!(csOurDb is null) && (csciClassConnex.Length > 0))
+            {
+                //Connection string exists - now let's try to connect!
+                SqlConnection dbConnex = null;
+                bool keepMoving = true;
+
+                try
+                {
+                    //Attempt the open!
+                    dbConnex = new SqlConnection(csciClassConnex);
+                    dbConnex.Open();
+                }
+                catch
+                {
+                    //The open failed
+                    keepMoving = false;
+                    ShowError($"Unable to open connection to the database using string:\n{csciClassConnex}");
+                }
+
+                if (keepMoving)
+                {
+                    //Create the query string
+                    SqlCommand query = new SqlCommand(databaseQuery, dbConnex);
+
+                    SqlDataReader dataReader = null;
+
+                    try
+                    {
+                        //Execute the query string
+                        dataReader = query.ExecuteReader();
+                    }
+                    catch
+                    {
+                        keepMoving = false;
+                        ShowError($"Unable to perform the query {databaseQuery}");
+                    }
+
+                    if (keepMoving)
+                    {
+                        //Loop while there are more results
+                        while (dataReader.Read())
+                        {
+                            try
+                            {
+                                //Read the current result and transform it into
+                                //a Movie object
+                                
+                                newMovie.Id = Convert.ToInt32(dataReader["Id"]);
+                                newMovie.Title = Convert.ToString(dataReader["Title"]);
+                                newMovie.Year = Convert.ToInt32(dataReader["Year"]);
+                                newMovie.Director = Convert.ToString(dataReader["Director"]);
+                                newMovie.Genre = Convert.ToInt32(dataReader["Genre"]);
+                                //Check for dbNull
+                                if (dataReader["RottenTomatoesScore"] != DBNull.Value)
+                                    newMovie.RottenTomatoesScore = Convert.ToInt32(dataReader["RottenTomatoesScore"]);
+                                //Check for dbNull
+                                if (dataReader["TotalEarned"] != DBNull.Value)
+                                    newMovie.TotalEarned = Convert.ToDouble(dataReader["TotalEarned"]);
+                                movieList.Add(newMovie);
+                            }
+                            catch
+                            {
+                                //An error occurred trying to convert this result
+                                //into a Movie - tell the user, but continue with
+                                //next query result when the user responds.
+                                ShowError("Unknown error occurred reading a record.");
+                            }
+                        }
+
+                        //Close the reader
+                        dataReader.Close();
+
+                    }
+
+                    //Close the connection
+                    dbConnex.Close();
+                }
+            }
+            else
+                //Entry didn't exist in App.config!
+                ShowError($"Unable to retrieve the connection string for {configOurDb} from App.config.");
+        */
+
+
+
+
 
         static public bool UpdateMovieInDatabase(Movie existingMovie)
         {

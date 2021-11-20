@@ -93,6 +93,7 @@ namespace MainForm
             this.addMovieToolStripMenuItem.Name = "addMovieToolStripMenuItem";
             this.addMovieToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.addMovieToolStripMenuItem.Text = "Add Movie";
+            this.addMovieToolStripMenuItem.Click += new System.EventHandler(this.addMovieToolStripMenuItem_Click);
             // 
             // deleteMovieToolStripMenuItem
             // 
@@ -106,6 +107,7 @@ namespace MainForm
             this.updateMovieToolStripMenuItem.Name = "updateMovieToolStripMenuItem";
             this.updateMovieToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.updateMovieToolStripMenuItem.Text = "Update Movie";
+            this.updateMovieToolStripMenuItem.Click += new System.EventHandler(this.updateMovieToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
