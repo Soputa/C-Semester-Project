@@ -32,10 +32,11 @@ namespace MainForm
             Close();
         }
 
+        
         private void buttonClear_Click(object sender, EventArgs e)
         {
             //Set all text box to empty
-            textBoxMovieTittle.Text = "";
+            textBoxMovieTitle.Text = "";
             textBoxYear.Text = "";
             textBoxDirector.Text = "";
             textBoxRottenTScore.Text = "";
@@ -43,13 +44,16 @@ namespace MainForm
             comboBox1Genre.SelectedValue = -1;
 
         }
+        //TotalEarned
+        //textBoxBoxOfficeE
         int year = 0;
         int RottenTScore = 0;
-        double TotalEarned = 0;
+        double dTotalEarned = 0;
         private void buttonAdd_Click(object sender, EventArgs e)
         {
+
             //Vaidation checks for Txt fields year,Director,Gerne,textBoxRottenTScore, To
-            if (textBoxMovieTittle.Text == "")
+            if (textBoxMovieTitle.Text == "")
                 MessageBox.Show("Pleae enter a movie tittle");
             else if (!int.TryParse(textBoxYear.Text, out year))
                 MessageBox.Show("Please enter a year");
@@ -57,13 +61,39 @@ namespace MainForm
                 MessageBox.Show("Please enter a Director");
             else if (comboBox1Genre.SelectedIndex == -1)
                 MessageBox.Show("Please select a Genre from the list");
-            else if (!int.TryParse(textBoxRottenTScore.Text, out RottenTScore))
-                MessageBox.Show("Please enter a RT score");
-            else if (!double.TryParse(textBoxBoxOfficeE.Text, out TotalEarned))
+            else if ((textBoxRottenTScore.Text.Length > 0) && (!int.TryParse(textBoxRottenTScore.Text, out RottenTScore)))
+                MessageBox.Show("Please enter a RT score, it must be a valid number");
+            else if ((textBoxBoxOfficeE.Text.Length > 0) && (!double.TryParse(textBoxBoxOfficeE.Text, out dTotalEarned)))
                 MessageBox.Show("Please enter the movies total Box office Earrings (If the movie lost money state the amount lost like '-1000000'");
-            else 
-            {
-                DbOps.AddMovieToDatabase(newMovie);
+            else if (DbOps.FindMovieInDatabase(textBoxMovieTitle.Text))
+                MessageBox.Show("That movie tittle already exist in the database.");
+
+            else
+            {   // If the movie donesn't exist, try to add it 
+                Movie newMovie = new Movie();
+                newMovie.Title = textBoxMovieTitle.Text;
+                newMovie.Year = year;
+                newMovie.Director = textBoxDirector.Text;
+                newMovie.Genre = comboBox1Genre.SelectedIndex + 1;
+                if (textBoxRottenTScore.Text.Length > 0)
+                    newMovie.RottenTomatoesScore = RottenTScore;
+                if (textBoxBoxOfficeE.Text.Length > 0)
+                    newMovie.TotalEarned = dTotalEarned;
+
+                bool success = DbOps.AddMovieToDatabase(newMovie);
+
+                if(success)
+                {
+                    MessageBox.Show("Movie was successful added");
+                    textBoxMovieTitle.Text = "";
+                    textBoxYear.Text = "";
+                    textBoxDirector.Text = "";
+                    textBoxRottenTScore.Text = "";
+                    textBoxBoxOfficeE.Text = "";
+                    comboBox1Genre.SelectedValue = -1;
+
+
+                }
             }
 
             

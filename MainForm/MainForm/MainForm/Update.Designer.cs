@@ -29,7 +29,7 @@ namespace MainForm
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBoxGenre = new System.Windows.Forms.ComboBox();
+            this.comboBox1Genre = new System.Windows.Forms.ComboBox();
             this.labelMovieTitle = new System.Windows.Forms.Label();
             this.labelYearReleased = new System.Windows.Forms.Label();
             this.labelDirector = new System.Windows.Forms.Label();
@@ -40,20 +40,20 @@ namespace MainForm
             this.buttonUpdate = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
-            this.textBoxMovieTittle = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBoxMovieTitle = new System.Windows.Forms.TextBox();
+            this.textBoxYear = new System.Windows.Forms.TextBox();
+            this.textBoxDirector = new System.Windows.Forms.TextBox();
+            this.textBoxRottenTScore = new System.Windows.Forms.TextBox();
+            this.textBoxBoxOfficeE = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // comboBoxGenre
+            // comboBox1Genre
             // 
-            this.comboBoxGenre.FormattingEnabled = true;
-            this.comboBoxGenre.Location = new System.Drawing.Point(172, 133);
-            this.comboBoxGenre.Name = "comboBoxGenre";
-            this.comboBoxGenre.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxGenre.TabIndex = 0;
+            this.comboBox1Genre.FormattingEnabled = true;
+            this.comboBox1Genre.Location = new System.Drawing.Point(172, 133);
+            this.comboBox1Genre.Name = "comboBox1Genre";
+            this.comboBox1Genre.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1Genre.TabIndex = 0;
             // 
             // labelMovieTitle
             // 
@@ -132,70 +132,73 @@ namespace MainForm
             this.buttonUpdate.TabIndex = 8;
             this.buttonUpdate.Text = "Update";
             this.buttonUpdate.UseVisualStyleBackColor = true;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
             // buttonClear
             // 
-            this.buttonClear.Location = new System.Drawing.Point(230, 323);
+            this.buttonClear.Location = new System.Drawing.Point(284, 323);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(93, 33);
             this.buttonClear.TabIndex = 9;
             this.buttonClear.Text = "Clear";
             this.buttonClear.UseVisualStyleBackColor = true;
+            this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
             // 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(390, 323);
+            this.buttonClose.Location = new System.Drawing.Point(468, 323);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(97, 33);
             this.buttonClose.TabIndex = 10;
             this.buttonClose.Text = "Close";
             this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
-            // textBoxMovieTittle
+            // textBoxMovieTitle
             // 
-            this.textBoxMovieTittle.Location = new System.Drawing.Point(172, 35);
-            this.textBoxMovieTittle.Name = "textBoxMovieTittle";
-            this.textBoxMovieTittle.Size = new System.Drawing.Size(280, 20);
-            this.textBoxMovieTittle.TabIndex = 11;
+            this.textBoxMovieTitle.Location = new System.Drawing.Point(172, 35);
+            this.textBoxMovieTitle.Name = "textBoxMovieTitle";
+            this.textBoxMovieTitle.Size = new System.Drawing.Size(280, 20);
+            this.textBoxMovieTitle.TabIndex = 11;
             // 
-            // textBox2
+            // textBoxYear
             // 
-            this.textBox2.Location = new System.Drawing.Point(172, 67);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(36, 20);
-            this.textBox2.TabIndex = 12;
+            this.textBoxYear.Location = new System.Drawing.Point(172, 67);
+            this.textBoxYear.Name = "textBoxYear";
+            this.textBoxYear.Size = new System.Drawing.Size(36, 20);
+            this.textBoxYear.TabIndex = 12;
             // 
-            // textBox3
+            // textBoxDirector
             // 
-            this.textBox3.Location = new System.Drawing.Point(172, 100);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(280, 20);
-            this.textBox3.TabIndex = 13;
+            this.textBoxDirector.Location = new System.Drawing.Point(172, 100);
+            this.textBoxDirector.Name = "textBoxDirector";
+            this.textBoxDirector.Size = new System.Drawing.Size(280, 20);
+            this.textBoxDirector.TabIndex = 13;
             // 
-            // textBox4
+            // textBoxRottenTScore
             // 
-            this.textBox4.Location = new System.Drawing.Point(172, 196);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(56, 20);
-            this.textBox4.TabIndex = 14;
+            this.textBoxRottenTScore.Location = new System.Drawing.Point(172, 196);
+            this.textBoxRottenTScore.Name = "textBoxRottenTScore";
+            this.textBoxRottenTScore.Size = new System.Drawing.Size(56, 20);
+            this.textBoxRottenTScore.TabIndex = 14;
             // 
-            // textBox5
+            // textBoxBoxOfficeE
             // 
-            this.textBox5.Location = new System.Drawing.Point(172, 261);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 15;
+            this.textBoxBoxOfficeE.Location = new System.Drawing.Point(172, 261);
+            this.textBoxBoxOfficeE.Name = "textBoxBoxOfficeE";
+            this.textBoxBoxOfficeE.Size = new System.Drawing.Size(100, 20);
+            this.textBoxBoxOfficeE.TabIndex = 15;
             // 
             // Update
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBoxMovieTittle);
+            this.Controls.Add(this.textBoxBoxOfficeE);
+            this.Controls.Add(this.textBoxRottenTScore);
+            this.Controls.Add(this.textBoxDirector);
+            this.Controls.Add(this.textBoxYear);
+            this.Controls.Add(this.textBoxMovieTitle);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonClear);
             this.Controls.Add(this.buttonUpdate);
@@ -206,7 +209,7 @@ namespace MainForm
             this.Controls.Add(this.labelDirector);
             this.Controls.Add(this.labelYearReleased);
             this.Controls.Add(this.labelMovieTitle);
-            this.Controls.Add(this.comboBoxGenre);
+            this.Controls.Add(this.comboBox1Genre);
             this.Name = "Update";
             this.Text = "UpdateForm";
             this.Load += new System.EventHandler(this.Update_Load);
@@ -217,7 +220,7 @@ namespace MainForm
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBoxGenre;
+        private System.Windows.Forms.ComboBox comboBox1Genre;
         private System.Windows.Forms.Label labelMovieTitle;
         private System.Windows.Forms.Label labelYearReleased;
         private System.Windows.Forms.Label labelDirector;
@@ -228,10 +231,10 @@ namespace MainForm
         private System.Windows.Forms.Button buttonUpdate;
         private System.Windows.Forms.Button buttonClear;
         private System.Windows.Forms.Button buttonClose;
-        private System.Windows.Forms.TextBox textBoxMovieTittle;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox textBoxMovieTitle;
+        private System.Windows.Forms.TextBox textBoxYear;
+        private System.Windows.Forms.TextBox textBoxDirector;
+        private System.Windows.Forms.TextBox textBoxRottenTScore;
+        private System.Windows.Forms.TextBox textBoxBoxOfficeE;
     }
 }

@@ -40,7 +40,7 @@ namespace MainForm
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
-            this.textBoxMovieTittle = new System.Windows.Forms.TextBox();
+            this.textBoxMovieTitle = new System.Windows.Forms.TextBox();
             this.textBoxYear = new System.Windows.Forms.TextBox();
             this.textBoxDirector = new System.Windows.Forms.TextBox();
             this.textBoxRottenTScore = new System.Windows.Forms.TextBox();
@@ -155,12 +155,12 @@ namespace MainForm
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
-            // textBoxMovieTittle
+            // textBoxMovieTitle
             // 
-            this.textBoxMovieTittle.Location = new System.Drawing.Point(96, 91);
-            this.textBoxMovieTittle.Name = "textBoxMovieTittle";
-            this.textBoxMovieTittle.Size = new System.Drawing.Size(279, 20);
-            this.textBoxMovieTittle.TabIndex = 11;
+            this.textBoxMovieTitle.Location = new System.Drawing.Point(96, 91);
+            this.textBoxMovieTitle.Name = "textBoxMovieTitle";
+            this.textBoxMovieTitle.Size = new System.Drawing.Size(279, 20);
+            this.textBoxMovieTitle.TabIndex = 11;
             // 
             // textBoxYear
             // 
@@ -208,7 +208,7 @@ namespace MainForm
             this.Controls.Add(this.textBoxRottenTScore);
             this.Controls.Add(this.textBoxDirector);
             this.Controls.Add(this.textBoxYear);
-            this.Controls.Add(this.textBoxMovieTittle);
+            this.Controls.Add(this.textBoxMovieTitle);
             this.Controls.Add(this.groupBoxAddBtn);
             this.Controls.Add(this.labelBoxOfficeE);
             this.Controls.Add(this.labelRottenTomatoesScore);
@@ -239,7 +239,7 @@ namespace MainForm
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Button buttonClear;
         private System.Windows.Forms.Button buttonAdd;
-        private System.Windows.Forms.TextBox textBoxMovieTittle;
+        private System.Windows.Forms.TextBox textBoxMovieTitle;
         private System.Windows.Forms.TextBox textBoxYear;
         private System.Windows.Forms.TextBox textBoxDirector;
         private System.Windows.Forms.TextBox textBoxRottenTScore;
