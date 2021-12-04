@@ -62,54 +62,60 @@ namespace MainForm
             // labelMovieTittle
             // 
             this.labelMovieTittle.AutoSize = true;
+            this.labelMovieTittle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelMovieTittle.Location = new System.Drawing.Point(28, 91);
             this.labelMovieTittle.Name = "labelMovieTittle";
-            this.labelMovieTittle.Size = new System.Drawing.Size(62, 13);
+            this.labelMovieTittle.Size = new System.Drawing.Size(87, 20);
             this.labelMovieTittle.TabIndex = 1;
             this.labelMovieTittle.Text = "Movie Title:";
             // 
             // labelYear
             // 
             this.labelYear.AutoSize = true;
-            this.labelYear.Location = new System.Drawing.Point(51, 146);
+            this.labelYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelYear.Location = new System.Drawing.Point(64, 146);
             this.labelYear.Name = "labelYear";
-            this.labelYear.Size = new System.Drawing.Size(32, 13);
+            this.labelYear.Size = new System.Drawing.Size(47, 20);
             this.labelYear.TabIndex = 2;
             this.labelYear.Text = "Year:";
             // 
             // labelDirector
             // 
             this.labelDirector.AutoSize = true;
-            this.labelDirector.Location = new System.Drawing.Point(43, 204);
+            this.labelDirector.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDirector.Location = new System.Drawing.Point(42, 199);
             this.labelDirector.Name = "labelDirector";
-            this.labelDirector.Size = new System.Drawing.Size(47, 13);
+            this.labelDirector.Size = new System.Drawing.Size(69, 20);
             this.labelDirector.TabIndex = 3;
             this.labelDirector.Text = "Director:";
             // 
             // labelGenre
             // 
             this.labelGenre.AutoSize = true;
-            this.labelGenre.Location = new System.Drawing.Point(51, 267);
+            this.labelGenre.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelGenre.Location = new System.Drawing.Point(57, 264);
             this.labelGenre.Name = "labelGenre";
-            this.labelGenre.Size = new System.Drawing.Size(39, 13);
+            this.labelGenre.Size = new System.Drawing.Size(58, 20);
             this.labelGenre.TabIndex = 4;
             this.labelGenre.Text = "Genre:";
             // 
             // labelRottenTomatoesScore
             // 
             this.labelRottenTomatoesScore.AutoSize = true;
-            this.labelRottenTomatoesScore.Location = new System.Drawing.Point(97, 320);
+            this.labelRottenTomatoesScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelRottenTomatoesScore.Location = new System.Drawing.Point(64, 318);
             this.labelRottenTomatoesScore.Name = "labelRottenTomatoesScore";
-            this.labelRottenTomatoesScore.Size = new System.Drawing.Size(123, 13);
+            this.labelRottenTomatoesScore.Size = new System.Drawing.Size(183, 20);
             this.labelRottenTomatoesScore.TabIndex = 5;
             this.labelRottenTomatoesScore.Text = "Rotten Tomatoes Score:";
             // 
             // labelBoxOfficeE
             // 
             this.labelBoxOfficeE.AutoSize = true;
-            this.labelBoxOfficeE.Location = new System.Drawing.Point(293, 320);
+            this.labelBoxOfficeE.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBoxOfficeE.Location = new System.Drawing.Point(322, 322);
             this.labelBoxOfficeE.Name = "labelBoxOfficeE";
-            this.labelBoxOfficeE.Size = new System.Drawing.Size(103, 13);
+            this.labelBoxOfficeE.Size = new System.Drawing.Size(153, 20);
             this.labelBoxOfficeE.TabIndex = 6;
             this.labelBoxOfficeE.Text = "Box Office Earnings:";
             // 
@@ -157,35 +163,35 @@ namespace MainForm
             // 
             // textBoxMovieTitle
             // 
-            this.textBoxMovieTitle.Location = new System.Drawing.Point(96, 91);
+            this.textBoxMovieTitle.Location = new System.Drawing.Point(117, 91);
             this.textBoxMovieTitle.Name = "textBoxMovieTitle";
             this.textBoxMovieTitle.Size = new System.Drawing.Size(279, 20);
             this.textBoxMovieTitle.TabIndex = 11;
             // 
             // textBoxYear
             // 
-            this.textBoxYear.Location = new System.Drawing.Point(96, 146);
+            this.textBoxYear.Location = new System.Drawing.Point(117, 146);
             this.textBoxYear.Name = "textBoxYear";
             this.textBoxYear.Size = new System.Drawing.Size(100, 20);
             this.textBoxYear.TabIndex = 12;
             // 
             // textBoxDirector
             // 
-            this.textBoxDirector.Location = new System.Drawing.Point(96, 201);
+            this.textBoxDirector.Location = new System.Drawing.Point(117, 201);
             this.textBoxDirector.Name = "textBoxDirector";
             this.textBoxDirector.Size = new System.Drawing.Size(204, 20);
             this.textBoxDirector.TabIndex = 13;
             // 
             // textBoxRottenTScore
             // 
-            this.textBoxRottenTScore.Location = new System.Drawing.Point(226, 320);
+            this.textBoxRottenTScore.Location = new System.Drawing.Point(253, 320);
             this.textBoxRottenTScore.Name = "textBoxRottenTScore";
             this.textBoxRottenTScore.Size = new System.Drawing.Size(52, 20);
             this.textBoxRottenTScore.TabIndex = 15;
             // 
             // textBoxBoxOfficeE
             // 
-            this.textBoxBoxOfficeE.Location = new System.Drawing.Point(402, 317);
+            this.textBoxBoxOfficeE.Location = new System.Drawing.Point(481, 322);
             this.textBoxBoxOfficeE.Name = "textBoxBoxOfficeE";
             this.textBoxBoxOfficeE.Size = new System.Drawing.Size(128, 20);
             this.textBoxBoxOfficeE.TabIndex = 16;
@@ -193,7 +199,7 @@ namespace MainForm
             // comboBox1Genre
             // 
             this.comboBox1Genre.FormattingEnabled = true;
-            this.comboBox1Genre.Location = new System.Drawing.Point(96, 264);
+            this.comboBox1Genre.Location = new System.Drawing.Point(117, 264);
             this.comboBox1Genre.Name = "comboBox1Genre";
             this.comboBox1Genre.Size = new System.Drawing.Size(121, 21);
             this.comboBox1Genre.TabIndex = 17;

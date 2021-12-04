@@ -92,6 +92,7 @@ namespace MainForm
 
         private void refreshListToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            DbOps.RefreshMovies(masterMovieList);
 
         }
     }

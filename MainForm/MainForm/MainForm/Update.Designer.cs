@@ -123,6 +123,7 @@ namespace MainForm
             this.buttonFind.TabIndex = 7;
             this.buttonFind.Text = "Find";
             this.buttonFind.UseVisualStyleBackColor = true;
+            this.buttonFind.Click += new System.EventHandler(this.buttonFind_Click);
             // 
             // buttonUpdate
             // 

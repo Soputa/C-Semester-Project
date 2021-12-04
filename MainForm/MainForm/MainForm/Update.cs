@@ -12,11 +12,25 @@ namespace MainForm
 {
     public partial class Update : Form
     {
+
+        
         public Update()
         {
             InitializeComponent();
+            LoadDropDownItems();
         }
 
+        public Update(string movieTitle)
+        {
+            if (movieTitle.Length > 0)
+            {
+                textBoxMovieTitle.Text = movieTitle;
+                SearchForMovie();
+            }
+
+        }
+
+        private Movie LastFoundMoive = new Movie();
 
         private void LoadDropDownItems()
         {
@@ -29,14 +43,18 @@ namespace MainForm
                     comboBox1Genre.Items.Add(genre);
         }
 
+
         private void Update_Load(object sender, EventArgs e)
         {
             LoadDropDownItems();
+            textBoxYear.Enabled = false;
+            textBoxDirector.Enabled = false;
+            comboBox1Genre.Enabled = false;
+            textBoxRottenTScore.Enabled = false;
+            textBoxBoxOfficeE.Enabled = false;
+            buttonUpdate.Enabled = false;
 
-            if(movieTitle.Lenght >0)
-            {
-                textBoxMovieTitle.Text = movieTitle;
-            }
+
         }
 
         int year = 0;
@@ -60,14 +78,14 @@ namespace MainForm
                 MessageBox.Show("Please enter the movies total Box office Earrings (If the movie lost money state the amount lost like '-1000000'");
             else if (DbOps.FindMovieInDatabase(textBoxMovieTitle.Text))
                 MessageBox.Show("That movie tittle already exist in the database.");
-            else if ((textBoxMovieTitle.Text!=LastFoundMovie.Title) && (DbOps.FindMovieInDatabase(textBoxMovieTitle.Text)))
+            else if ((textBoxMovieTitle.Text!= LastFoundMoive.Title) && (DbOps.FindMovieInDatabase(textBoxMovieTitle.Text)))
                 MessageBox.Show("A movie with this title already exists in the database");
             else
             {
                 //Attemp to update movie 
                 Movie updateMovie = new Movie();
                 //Keep the original ID from the found movie
-                updateMovie.Id = LastFoundMovie.Id;
+                updateMovie.Id = LastFoundMoive.Id;
                 //Add the the found content 
                 updateMovie.Title = textBoxMovieTitle.Text;
                 updateMovie.Year = year;
@@ -83,7 +101,7 @@ namespace MainForm
 
                 if (success)
                 {
-                    MessageBox.Show("Movie was successful added");
+                    MessageBox.Show("Movie was successful updated");
                     textBoxMovieTitle.Text = "";
                     textBoxYear.Text = "";
                     textBoxDirector.Text = "";
@@ -91,7 +109,11 @@ namespace MainForm
                     textBoxBoxOfficeE.Text = "";
                     comboBox1Genre.SelectedValue = -1;
                     textBoxYear.Enabled = false;
-
+                    textBoxDirector.Enabled = false;
+                    comboBox1Genre.Enabled = false;
+                    textBoxRottenTScore.Enabled = false;
+                    textBoxBoxOfficeE.Enabled = false;
+                    buttonUpdate.Enabled = false;
 
                 }
 
@@ -113,5 +135,56 @@ namespace MainForm
             textBoxBoxOfficeE.Text = "";
             comboBox1Genre.SelectedValue = -1;
         }
+
+        private void buttonFind_Click(object sender, EventArgs e)
+        {
+            SearchForMovie();
+        }
+
+        private void SearchForMovie()
+        {
+            textBoxYear.Enabled = false;
+            textBoxDirector.Enabled = false;
+            comboBox1Genre.Enabled = false;
+            textBoxRottenTScore.Enabled = false;
+            textBoxBoxOfficeE.Enabled = false;
+            buttonUpdate.Enabled = false;
+            textBoxYear.Clear();
+            textBoxDirector.Clear();
+            textBoxRottenTScore.Clear();
+            textBoxBoxOfficeE.Clear();
+            comboBox1Genre.SelectedIndex = -1;
+            LastFoundMoive = new Movie();
+
+            
+            if(DbOps.FindMovieInDatabase(textBoxMovieTitle.Text, out LastFoundMoive))
+            {
+                //The movie was found populate the feilds with the data from the found movie
+                textBoxYear.Text = $"{LastFoundMoive.Year}";
+                textBoxDirector.Text = LastFoundMoive.Director;
+                comboBox1Genre.SelectedIndex = LastFoundMoive.Genre - 1;
+                textBoxRottenTScore.Text = LastFoundMoive.RottenTomatoesScoreText;
+                if (LastFoundMoive.TotalEarned > 0)
+                    textBoxBoxOfficeE.Text = $"{LastFoundMoive.TotalEarned}";
+                else
+                    textBoxBoxOfficeE.Text = "";
+
+                //Now that we have comfirmed that the movie exist allow the user to make changes
+                textBoxYear.Enabled = true;
+                textBoxDirector.Enabled = true;
+                comboBox1Genre.Enabled = true;
+                textBoxRottenTScore.Enabled = true;
+                textBoxBoxOfficeE.Enabled = true;
+                buttonUpdate.Enabled = true;
+
+            }
+            else
+            {
+                //error message and 
+                MessageBox.Show($"The movie tittle you searched wasn't found:\n{textBoxMovieTitle.Text}");
+            }
+
+        }
+
     }
 }

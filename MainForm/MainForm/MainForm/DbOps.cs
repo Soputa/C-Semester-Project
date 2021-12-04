@@ -38,7 +38,7 @@ namespace MainForm
         //The command we'll use to update an existing movie in the table
         private const string databaseUpdateCommand = "UPDATE dbo.MOVIES SET Title=@title, Year=@year, Director=@director, Genre=@genre, RottenTomatoesScore=@rotten, TotalEarned=@earnings WHERE Id=@id";
 
-        //The command we'll use to update an existing movie in the table
+        //The command we'll use to delete an existing movie in the table
         private const string databaseDeleteCommand = "DELETE FROM dbo.MOVIES WHERE Id=@id";
 
         static private void ShowError(string errorToDisplay)
@@ -144,7 +144,7 @@ namespace MainForm
         }
 
         static public bool FindMovieInDatabase(string movieTitle, out Movie foundMovie)
-          
+
         {
             //Assume the movie isn't found esp if an error occurs
             bool retValue = false;
@@ -309,122 +309,74 @@ namespace MainForm
         }
 
         static public bool UpdateMovieInDatabase(Movie existingMovie)
-        {
-            //This method assumes that the Id property of the existingMovie object
-            //will be the record that needs updated, and all other properties will
-            //be updated for that record in the table
-
-            //Assume the movie isn't updated esp if an error occurs
+        { //Assume the movie isn't added esp if an error occurs
             bool retValue = false;
 
-            //Implementation removed -----------------------------
+            //Retrieve the connection string from the App.Config file
+            ConnectionStringSettings csOurDb = ConfigurationManager.ConnectionStrings[configOurDb];
+            string csciClassConnex = csOurDb?.ConnectionString;
+            if (!(csOurDb is null) && (csciClassConnex.Length > 0))
+            {
+                //Connection string exists - now let's try to connect!
+                SqlConnection dbConnex = null;
+                bool keepMoving = true;
+
+                try
+                {
+                    //Attempt the open!
+                    dbConnex = new SqlConnection(csciClassConnex);
+                    dbConnex.Open();
+                }
+                catch
+                {
+                    //The open failed
+                    keepMoving = false;
+                    ShowError($"Unable to open connection to the database using string:\n{csciClassConnex}");
+                }
+
+                if (keepMoving)
+                {
+                    //Assume the movie isn't updated esp if an error occurs
+                    SqlCommand query = new SqlCommand(databaseUpdateCommand, dbConnex);
+                    query.Parameters.Add(new SqlParameter("title", existingMovie.Title));
+                    query.Parameters.Add(new SqlParameter("year", existingMovie.Year));
+                    query.Parameters.Add(new SqlParameter("director", existingMovie.Director));
+                    query.Parameters.Add(new SqlParameter("genre", existingMovie.Genre));
+                    if (existingMovie.RottenTomatoesScore >= 0)
+                        query.Parameters.Add(new SqlParameter("rotten", existingMovie.RottenTomatoesScore));
+                    else
+                        query.Parameters.Add(new SqlParameter("rotten", DBNull.Value));
+                    if (existingMovie.TotalEarned >= 0)
+                        query.Parameters.Add(new SqlParameter("earnings", existingMovie.TotalEarned));
+                    else
+                        query.Parameters.Add(new SqlParameter("earnings", DBNull.Value));
+                    query.Parameters.Add(new SqlParameter("id", existingMovie.Id));
+
+                    try
+                    {
+                        //execute the command string
+                        query.ExecuteNonQuery();
+                        retValue = true;
+                    }
+                    catch
+                    {
+                        keepMoving = false;
+                        ShowError($"Unable to perform the command {databaseInsertCommand}");
+                    }
+
+                    //Close the connection
+                    dbConnex.Close();
+                }
+            }
+            else
+                //Entry didn't exist in App.config!
+                ShowError($"Unable to retrieve the connection string for {configOurDb} from App.config.");
 
             return retValue;
         }
-        /*   ConnectionStringSettings csOurDb = ConfigurationManager.ConnectionStrings[configOurDb];
-       string csciClassConnex = csOurDb?.ConnectionString;
+        //Implementation removed -----------------------------
 
-       if (!(csOurDb is null) && (csciClassConnex.Length > 0))
-       {
-           //Connection string exists - now let's try to connect!
-           SqlConnection dbConnex = null;
-           bool keepMoving = true;
 
-           try
-           {
-               //Attempt the open!
-               dbConnex.Open();
-               cmd = new SqlCommand("databaseInsertCommand", dbConnex);
-           }
-
-   /*
-
-       /*
-       //Retrieve the connection string from the App.Config file
-       ConnectionStringSettings csOurDb = ConfigurationManager.ConnectionStrings[configOurDb];
-       string csciClassConnex = csOurDb?.ConnectionString;
-       if (!(csOurDb is null) && (csciClassConnex.Length > 0))
-       {
-           //Connection string exists - now let's try to connect!
-           SqlConnection dbConnex = null;
-           bool keepMoving = true;
-
-           try
-           {
-               //Attempt the open!
-               dbConnex = new SqlConnection(csciClassConnex);
-               dbConnex.Open();
-           }
-           catch
-           {
-               //The open failed
-               keepMoving = false;
-               ShowError($"Unable to open connection to the database using string:\n{csciClassConnex}");
-           }
-
-           if (keepMoving)
-           {
-               //Create the query string
-               SqlCommand query = new SqlCommand(databaseQuery, dbConnex);
-
-               SqlDataReader dataReader = null;
-
-               try
-               {
-                   //Execute the query string
-                   dataReader = query.ExecuteReader();
-               }
-               catch
-               {
-                   keepMoving = false;
-                   ShowError($"Unable to perform the query {databaseQuery}");
-               }
-
-               if (keepMoving)
-               {
-                   //Loop while there are more results
-                   while (dataReader.Read())
-                   {
-                       try
-                       {
-                           //Read the current result and transform it into
-                           //a Movie object
-
-                           newMovie.Id = Convert.ToInt32(dataReader["Id"]);
-                           newMovie.Title = Convert.ToString(dataReader["Title"]);
-                           newMovie.Year = Convert.ToInt32(dataReader["Year"]);
-                           newMovie.Director = Convert.ToString(dataReader["Director"]);
-                           newMovie.Genre = Convert.ToInt32(dataReader["Genre"]);
-                           //Check for dbNull
-                           if (dataReader["RottenTomatoesScore"] != DBNull.Value)
-                               newMovie.RottenTomatoesScore = Convert.ToInt32(dataReader["RottenTomatoesScore"]);
-                           //Check for dbNull
-                           if (dataReader["TotalEarned"] != DBNull.Value)
-                               newMovie.TotalEarned = Convert.ToDouble(dataReader["TotalEarned"]);
-                           movieList.Add(newMovie);
-                       }
-                       catch
-                       {
-                           //An error occurred trying to convert this result
-                           //into a Movie - tell the user, but continue with
-                           //next query result when the user responds.
-                           ShowError("Unknown error occurred reading a record.");
-                       }
-                   }
-
-                   //Close the reader
-                   dataReader.Close();
-
-               }
-
-               //Close the connection
-               dbConnex.Close();
-           }
-       }
-       else
-           //Entry didn't exist in App.config!
-           ShowError($"Unable to retrieve the connection string for {configOurDb} from App.config.");
-   */
 
 
 
@@ -436,13 +388,74 @@ namespace MainForm
             //This method assumes that the Id property of the existingMovie object
             //will be the record that needs deleted, and all other properties will
             //be ignored.
-
-            //Assume the movie isn't deleted esp if an error occurs
+            //Assume the movie isn't added esp if an error occurs
             bool retValue = false;
 
-            //Implementation removed -----------------------------
+            //Retrieve the connection string from the App.Config file
+            ConnectionStringSettings csOurDb = ConfigurationManager.ConnectionStrings[configOurDb];
+            string csciClassConnex = csOurDb?.ConnectionString;
+            if (!(csOurDb is null) && (csciClassConnex.Length > 0))
+            {
+                //Connection string exists - now let's try to connect!
+                SqlConnection dbConnex = null;
+                bool keepMoving = true;
+
+                try
+                {
+                    //Attempt the open!
+                    dbConnex = new SqlConnection(csciClassConnex);
+                    dbConnex.Open();
+                }
+                catch
+                {
+                    //The open failed
+                    keepMoving = false;
+                    ShowError($"Unable to open connection to the database using string:\n{csciClassConnex}");
+                }
+
+                if (keepMoving)
+                {
+                    //Create the command string
+                    SqlCommand query = new SqlCommand(databaseDeleteCommand, dbConnex);
+                    query.Parameters.Remove(new SqlParameter("title", newMovie.Title));
+                    query.Parameters.Add(new SqlParameter("year", newMovie.Year));
+                    query.Parameters.Add(new SqlParameter("director", newMovie.Director));
+                    query.Parameters.Add(new SqlParameter("genre", newMovie.Genre));
+                    //Insert either the Rotten Tomatoes Score or DBNull if not specified
+                    if (newMovie.RottenTomatoesScore >= 0)
+                        query.Parameters.Add(new SqlParameter("rotten", newMovie.RottenTomatoesScore));
+                    else
+                        query.Parameters.Add(new SqlParameter("rotten", DBNull.Value));
+                    //Insert either the TotalEarned or DBNull if not specified
+                    if (newMovie.TotalEarned >= 0)
+                        query.Parameters.Add(new SqlParameter("earnings", newMovie.TotalEarned));
+                    else
+                        query.Parameters.Add(new SqlParameter("earnings", DBNull.Value));
+
+                    try
+                    {
+                        //Execute the command string
+                        query.ExecuteNonQuery();
+                        retValue = true;
+                    }
+                    catch
+                    {
+                        keepMoving = false;
+                        ShowError($"Unable to perform the command {databaseInsertCommand}");
+                    }
+
+                    //Close the connection
+                    dbConnex.Close();
+                }
+            }
+            else
+                //Entry didn't exist in App.config!
+                ShowError($"Unable to retrieve the connection string for {configOurDb} from App.config.");
 
             return retValue;
         }
     }
 }
+        
+    
+
